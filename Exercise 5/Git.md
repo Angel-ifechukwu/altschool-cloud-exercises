@@ -30,7 +30,7 @@ Submit the output of:
 
 ![Annotation 2022-09-05 030439](https://user-images.githubusercontent.com/79316134/189126636-afc55aeb-19d7-48c6-ae35-2636e4c32594.png)
 
-* Then I ran `git remote -v` to view the connections witr other branches.
+* Then I ran `git remote -v` to view the connections with other branches.
 
 ![remote](https://user-images.githubusercontent.com/79316134/189127242-e1b92264-2dc3-404b-9ff0-db19c832b129.png)
 
