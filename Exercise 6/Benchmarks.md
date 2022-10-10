@@ -12,6 +12,8 @@ For hardening my linux system I decided to pick 12 recommendations cutting acros
 
 ## Initial Setup
 
+### Filesystem Configuration
+
 ### 1.1.3 Ensure nodev option set on /tmp partition (Automated)
 
 ### Profile Applicability:
@@ -31,11 +33,52 @@ Verify that the nodev option is set if a `/tmp` partition exists
 
 Run the following command and verify that nothing is returned:
 
- `findmnt -n /tmp | grep -v nodev` 
+`findmnt -n /tmp | grep -v nodev`
  
  ### My Output : 
  
- After verifying that the `nodedev`is set and if a `/tmp` partition exists, I ran the command and nothing returned as expected.
+ ```ruby
+root@ubuntu-focal:~# findmnt -n /tmp | grep -v nodev
+root@ubuntu-focal:~#
+```
+ 
+ To verify that the `nodev` isn't set and that a `/tmp` partition doesn't exist, I ran the command and nothing returned as expected.
+ 
+### 1.1.7 Ensure `nodev` option set on `/dev/shm` partition (Automated)
+
+### Profile Applicability:
+* Level 1 - Server
+* Level 1 - Workstation
+
+### Description:
+
+The `nodev` mount option specifies that the filesystem cannot contain special devices.
+
+### Rationale:
+
+Since the `/dev/shm` filesystem is not intended to support devices, set this option to ensure
+that users cannot attempt to create special devices in `/dev/shm` partitions.
+
+### Audit:
+
+Run the following command and verify that nothing is returned:
+`findmnt -n /dev/shm | grep -v nodev`
+ 
+### My Output: 
+
+```ruby 
+root@ubuntu-focal:~#  findmnt -n /dev/shm | grep -v nodev
+root@ubuntu-focal:~
+```
+
+My output above coonfirms that the `nodev` option is set on `/dev/shm` partition and therefore complies with this benchmark.
+
+#
+
+
+
+
+
  
  
  
