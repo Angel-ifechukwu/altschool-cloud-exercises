@@ -23,17 +23,17 @@ For hardening my linux system I decided to pick 12 recommendations cutting acros
 The nodev mount option specifies that the filesystem cannot contain special devices.
 
 ### Rationale:
-Since the /tmp filesystem is not intended to support devices, set this option to ensure that
-users cannot attempt to create block or character special devices in /tmp .
+Since the `/tmp` filesystem is not intended to support devices, set this option to ensure that
+users cannot attempt to create block or character special devices in `/tmp` .
 
 ### Audit:
-Verify that the nodev option is set if a /tmp partition exists
+Verify that the nodev option is set if a `/tmp` partition exists
 
 Run the following command and verify that nothing is returned:
 
  `findmnt -n /tmp | grep -v nodev` 
  
- My Output : 
+ ### My Output : 
  
  After verifying that the `nodedev`is set and if a `/tmp` partition exists, I ran the command and nothing returned as expected.
  
