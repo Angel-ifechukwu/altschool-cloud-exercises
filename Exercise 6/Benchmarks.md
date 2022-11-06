@@ -171,10 +171,12 @@ Impact:
 Changing firewall settings while connected over network can result in being locked out of
 the system.
 220 | P a g e
-Audit:
+### Audit:
+
 Run the following command to verify that ufw is enabled:
-# systemctl is-enabled ufw
-enabled
+
+          `systemctl is-enabled ufw
+           enabled`
 
 ### My Output 
 
