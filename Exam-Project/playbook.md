@@ -27,7 +27,7 @@ I also tested the endpoints and here's a link to the result.
 
 
 
-                      ## Config.yaml
+## Config.yaml
 
 host: localhost
 mysql_user: root
@@ -38,9 +38,9 @@ db_name: angeldb
 http_port: "80"
 https_port: "443"
 ssh_port: "22"
-mysql_port: "330       6"
+mysql_port: "3306
 
-                                ## Playbook.yaml
+## Playbook.yaml
 
 
 ---
