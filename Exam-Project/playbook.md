@@ -29,6 +29,7 @@ I also tested the endpoints and here's a link to the result.
 
 ## Config.yaml
 
+```ruby
 host: localhost
 mysql_user: root
 mysql_root_password: 1234
@@ -39,10 +40,11 @@ http_port: "80"
 https_port: "443"
 ssh_port: "22"
 mysql_port: "3306
+```
 
 ## Playbook.yaml
 
-
+```ruby
 ---
 - name: deploy apache2 on host server[remote]
   hosts: all
@@ -395,3 +397,4 @@ mysql_port: "3306
 
     - name: SSL THingy
       command: sudo certbot --apache -w /var/www/laravel-app -d angelifechukwu.me -d www.angelifechuwku.me --non-interactive --agree-tos -m angelifechukwu00@gmail.com
+      ```
