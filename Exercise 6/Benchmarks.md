@@ -120,17 +120,23 @@ root@ubuntu-focal:/home/vagrant#
 
 The output above returns nothing which shows that `timesyncd` is enabled.
 
-2.1.15 Ensure mail transfer agent is configured for local-only mode
-(Automated)
-Profile Applicability:
- Level 1 - Server
- Level 1 - Workstation
-Description:
+### 2.1.15 Ensure mail transfer agent is configured for local-only mode(Automated)
+
+### Profile Applicability:
+
+* Level 1 - Server
+
+* Level 1 - Workstation
+
+### Description:
+
 Mail Transfer Agents (MTA), such as sendmail and Postfix, are used to listen for incoming
 mail and transfer the messages to the appropriate user or mail server. If the system is not
 intended to be a mail server, it is recommended that the MTA be configured to only process
 local mail.
-Rationale:
+
+### Rationale:
+
 The software for all Mail Transfer Agents is complex and most have a long history of
 security issues. While it is important to ensure that the system can process local mail
 messages, it is not necessary to have the MTA's daemon listening on a port unless the
@@ -138,39 +144,64 @@ server is intended to be a mail server that receives and processes mail from oth
 Note: This recommendation is designed around the exim4 mail server, depending on your
 environment you may have an alternative MTA installed such as sendmail. If this is the case
 consult the documentation for your installed MTA to configure the recommended state.
-Audit:
+
+### Audit:
+
 Run the following command to verify that the MTA is not listening on any non-loopback
 address (127.0.0.1 or::1).
+
 Nothing should be returned
-# ss -lntu | grep -E ':25\s' | grep -E -v '\s(127.0.0.1|::1):25\s'
+
+       ` ss -lntu | grep -E ':25\s' | grep -E -v '\s(127.0.0.1|::1):25\s'`
+      
+### My Output       
+       
+
+
+
+
+
 
 # Network Configuration
 
 ### 3.5.1.3 Ensure ufw service is enabled (Automated)
-Profile Applicability:
- Level 1 - Server
- Level 1 - Workstation
-Description:
+
+### Profile Applicability:
+
+* Level 1 - Server
+* Level 1 - Workstation
+
+### Description:
+
 UncomplicatedFirewall (ufw) is a frontend for iptables. ufw provides a framework for
 managing netfilter, as well as a command-line and available graphical user interface for
 manipulating the firewall.
-Notes:
- When running ufw enable or starting ufw via its initscript, ufw will flush its chains.
+
+### Notes:
+
+* When running ufw enable or starting ufw via its initscript, ufw will flush its chains.
 This is required so ufw can maintain a consistent state, but it may drop existing
 connections (eg ssh). ufw does support adding rules before enabling the firewall.
- Run the following command before running ufw enable.
-# ufw allow proto tcp from any to any port 22
- The rules will still be flushed, but the ssh port will be open after enabling the firewall.
+* Run the following command before running ufw enable.
+
+        `ufw allow proto tcp from any to any port 22`
+        
+* The rules will still be flushed, but the ssh port will be open after enabling the firewall.
 Please note that once ufw is 'enabled', ufw will not flush the chains when adding or
 removing rules (but will when modifying a rule or changing the default policy)
- By default, ufw will prompt when enabling the firewall while running under ssh. This
+* By default, ufw will prompt when enabling the firewall while running under ssh. This
 can be disabled by using ufw --force enable
-Rationale:
+
+### Rationale:
+
 The ufw service must be enabled and running in order for ufw to protect the system
-Impact:
+
+### Impact:
+
 Changing firewall settings while connected over network can result in being locked out of
 the system.
 220 | P a g e
+
 ### Audit:
 
 Run the following command to verify that ufw is enabled:
@@ -180,13 +211,108 @@ Run the following command to verify that ufw is enabled:
 
 ### My Output 
 
+        ```ruby
+          root@ubuntu-focal:/home/vagrant# systemctl is-enabled ufw
+          enabled
+          ```
+My output above shows that `ufw` is enabled and running and that confirms that my system is protected.
 
 
+3.5.3.2.3 Ensure iptables default deny firewall policy (Automated)
+
+### Profile Applicability:
+
+* Level 1 - Server
+* Level 1 - Workstation
+
+### Description:
+
+A default deny all policy on connections ensures that any unconfigured network usage will
+be rejected.
+
+### Notes:
+
+# Changing firewall settings while connected over network can result in being locked out
+of the system
+* Remediation will only affect the active system firewall, be sure to configure the default
+policy in your firewall management to apply on boot as well
+
+### Rationale:
+
+With a default accept policy the firewall will accept any packet that is not configured to be
+denied. It is easier to white list acceptable usage than to black list unacceptable usage.
+
+### Audit:
+
+Run the following command and verify that the policy for the INPUT , OUTPUT , and FORWARD
+chains is `DROP` or `REJECT` :
+         `iptables -L
+          Chain INPUT (policy DROP)
+          Chain FORWARD (policy DROP)
+          Chain OUTPUT (policy DROP)`
+
+### My Output
+
+```ruby 
+      root@ubuntu-focal:/home/vagrant# iptables -L
+Chain INPUT (policy DROP)
+target     prot opt source               destination
+ufw-before-logging-input  all  --  anywhere             anywhere
+ufw-before-input  all  --  anywhere             anywhere
+ufw-after-input  all  --  anywhere             anywhere
+ufw-after-logging-input  all  --  anywhere             anywhere
+ufw-reject-input  all  --  anywhere             anywhere
+ufw-track-input  all  --  anywhere             anywhere
+```
+
+After running the command `iptables -L` and getting the output shown above,  i confirmed that all unconfigures network usage have been denied access and/or rejected.
 
 
+# Logging and Auditing
 
+### 4.1.1.1 Ensure auditd is installed (Automated)
 
+### Profile Applicability:
 
+* Level 2 - Server
+* Level 2 - Workstation
+
+### Description:
+
+`auditd` is the userspace component to the Linux Auditing System. It's responsible for
+writing audit records to the disk
+
+### Rationale:
+
+The capturing of system events provides system administrators with information to allow
+them to determine if unauthorized access to their system is occurring.
+
+### Audit:
+
+Run the following command and verify `auditd is installed:`
+    
+    ` dpkg -s auditd audispd-plugins`
+
+### Remediation:
+
+Run the following command to Install `auditd`
+
+   `apt install auditd audispd-plugins`
+   
+### My Output
+
+```ruby
+       root@ubuntu-focal:/home/vagrant# dpkg -s auditd audispd-plugins
+Package: auditd
+Status: install ok installed
+Priority: optional
+Section: admin
+Installed-Size: 688
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+```
+ 
+ This output verifies that `auditd` has been securely installed and is read to be used.
+ 
  
  
  
