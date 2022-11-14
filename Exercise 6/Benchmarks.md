@@ -218,7 +218,7 @@ Run the following command to verify that ufw is enabled:
 My output above shows that `ufw` is enabled and running and that confirms that my system is protected.
 
 
-3.5.3.2.3 Ensure iptables default deny firewall policy (Automated)
+### 3.5.3.2.3 Ensure iptables default deny firewall policy (Automated)
 
 ### Profile Applicability:
 
