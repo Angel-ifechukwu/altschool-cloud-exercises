@@ -1,62 +1,81 @@
-Given the following IP address/CIDR: 193.16.20.35/29
+# Considering the IP address/CIDR of 193.16.20.35/29
 
-what is the Network IP
-number of hosts
-range of IP addresses
-broadcast IP from this subnet
+* What is the Network IP
+* Number of hosts
+* Range of IP addresses
+* Broadcast IP from this subnet
+
 Subnet Verification Link click me!
-Procedure:
-To solve this you have to first figure out the subnet mask from the given CIDR (/29)
 
-Note: The CIDR indicates the total number of active bits (1's) which also indicates the network portion of the IP address while the 0's indicate the host portion of the network.
+### Solution:
 
-Converting it to binary then gives:
+To solve this you have to find out what's the subnet mask from the given CIDR (/29)
 
-Network Portion: 1's
+The network component of the IP address is indicated by the total number of active bits (1s) in the CIDR, whereas the host portion of the network is shown by the 0s.
 
-Host Portion: 0's
+#### Converting it to binary:
 
-Netmask Binary: 11111111.11111111.11111111.11111000
+#### Network Portion: 1's
 
-Then inorder to convert the subnet mask address from binary to decimal apply the following formular
+#### Host Portion: 0's
 
-Note: In the binary system there are only 1s and 0s. Depending on their position in the octet, they get different values. Each position is a power of 2. To get the decimal number you have to sum up those numbers.
+#### Netmask Binary: 11111111.11111111.11111111.11111000
 
-First Octet	Second Octet	Third Octet	Fourth Octet	Fifth Octet	Sixth Octet	Seventh Octet	Eight Octet
-2^7	2^6	2^5	2^4	2^3	2^2	2^1	2^0
-128	64	32	16	8	4	2	1
+Apply the following formula to convert the subnet mask address from binary to decimal.
+
+There are just 1s and 0s in the binary system. They receive various values according to where they are in the octet. Every place is a power of two. You must add together those numbers to obtain the decimal value.
+
+|First Octet   | Second Octet   | Third Octet	| Fourth Octet   |	Fifth Octet   |	Sixth Octet   |	Seventh Octet   |	Eight Octet|
+| -----        | -----          | -----       | -----          | -----          | -----         | ----            | -----      |
+|2^7	         |2^6	            |2^5	        |2^4             |2^3             |2^2            |2^1              |2^0         |
+|128   	       |64	            |32           |	16	           |8	              |4              |2                |1           |
+
 Total no. of octets in binary: 128 + 64 + 32 + 16 + 8 + 4 + 2 + 1
 
-                         = 255
-First Octet:
-First Octet	Second Octet	Third Octet	Fourth Octet	Fifth Octet	Sixth Octet	Seventh Octet	Eight Octet
-128	64	32	16	8	4	2	1
-1	1	1	1	1	1	1	1
+                        = 255
+
+## First Octet:
+
+| First Octet  | Second Octet  | Third Octet  |	Fourth Octet  |	Fifth Octet  |	Sixth Octet  |	Seventh Octet  |	Eight Octet|
+| -----        | -----         | -----        | -----         | -----        | -----         | -----           | -----       |
+|128	         |64             |32	          |16             |8             |4              |2                |1            |
+|1	           |1	             |1             |1              |1	            |1             |1                |1            |
+
 Total: 255
 
-Second Octet:
-First Octet	Second Octet	Third Octet	Fourth Octet	Fifth Octet	Sixth Octet	Seventh Octet	Eight Octet
-128	64	32	16	8	4	2	1
-1	1	1	1	1	1	1	1
+## Second Octet:
+
+| First Octet  | Second Octet  | Third Octet  |	Fourth Octet  |	Fifth Octet  |	Sixth Octet  |	Seventh Octet  |	Eight Octet|
+| -----        | -----         | -----        | -----         | -----        | -----         | -----           | -----       |
+|128	         |64             |32	          |16             |8             |4              |2                |1            |
+|1	           |1	             |1             |1              |1	            |1             |1                |1            |
+
 Total: 255
 
-Third Octet:
-First Octet	Second Octet	Third Octet	Fourth Octet	Fifth Octet	Sixth Octet	Seventh Octet	Eight Octet
-128	64	32	16	8	4	2	1
-1	1	1	1	1	1	1	1
+## Third Octet:
+
+| First Octet  | Second Octet  | Third Octet  |	Fourth Octet  |	Fifth Octet  |	Sixth Octet  |	Seventh Octet  |	Eight Octet|
+| -----        | -----         | -----        | -----         | -----        | -----         | -----           | -----       |
+|128	         |64             |32	          |16             |8             |4              |2                |1            |
+|1	           |1	             |1             |1              |1	            |1             |1                |1            |
+
 Total: 255
 
-Fourth Octet:
-First Octet	Second Octet	Third Octet	Fourth Octet	Fifth Octet	Sixth Octet	Seventh Octet	Eight Octet
-128	64	32	16	8	4	2	1
-1	1	1	1	0	0	0	0
+## Fourth Octet:
+
+| First Octet  | Second Octet  | Third Octet  |	Fourth Octet  |	Fifth Octet  |	Sixth Octet  |	Seventh Octet  |	Eight Octet|
+| -----        | -----         | -----        | -----         | -----        | -----         | -----           | -----       |
+|128	         |64             |32	          |16             |8             |4              |2                |1            |
+|1	           |1	             |1             |1              |0	           |0              |0                |0            |
+
 Total: 248
 
 Octet Sum = 255.255.255.248
 
-Therefore: 11111111.11111111.11111111.11111000 in binary = 255.255.255.248
+Therefore 11111111.11111111.11111111.11111000 in binary i= 255.255.255.248
 
-Next is to find the wild card:
+The wild card must then be located:
+
 Wild card = subtract the subnet mask from 255.255.255.255
 
       = 255.255.255.255 - 255.255.255.248
@@ -73,7 +92,7 @@ Subnet Mask = 11111111.11111111.11111111.11111000
 
 Given IP = 11000001.00010000.00010100.00100011
 
-To find the network ID, simply do binary and operation between the given IP address and the subnet mask:
+## Simply do a binary and operation between the provided IP address and the subnet mask to determine the network ID.:
 
 First Octet:
 Binary and operation between (255 & 193) or (11111111 & 11000001)
