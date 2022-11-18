@@ -72,9 +72,9 @@ Total: 248
 
 Octet Sum = 255.255.255.248
 
-Therefore 11111111.11111111.11111111.11111000 in binary i= 255.255.255.248
+Therefore 11111111.11111111.11111111.11111000 in binary is = 255.255.255.248
 
-The wild card must then be located:
+### The wild card must then be located:
 
 Wild card = subtract the subnet mask from 255.255.255.255
 
@@ -83,73 +83,93 @@ Wild card = subtract the subnet mask from 255.255.255.255
       = 255 - 248
       
       = 7
-... Wild card = 0.0.0.7
+      
+Wild card = 0.0.0.7
 
-Next is to find the network ID:
+### Next is to find the network ID:
 Where
 
 Subnet Mask = 11111111.11111111.11111111.11111000
 
 Given IP = 11000001.00010000.00010100.00100011
 
-## Simply do a binary and operation between the provided IP address and the subnet mask to determine the network ID.:
+Simply do a binary and operation between the provided IP address and the subnet mask to determine the network ID.:
 
-First Octet:
+### First Octet:
+
 Binary and operation between (255 & 193) or (11111111 & 11000001)
 
-N/A	First Octet	Second Octet	Third Octet	Fourth Octet	Fifth Octet	Sixth Octet	Seventh Octet	Eight Octet
-Subnet Mask	1	1	1	1	1	1	1	1
-Given IP	1	1	0	0	0	0	0	1
-Result	1	1	0	0	0	0	0	1
+| N/A          | First Octet   | Second Octet |	Third Octet   |	Fourth Octet |	Fifth Octet  | 	Sixth Octet  | Seventh Octet | Eigth Octet |
+| -----        | -----         | -----        | -----         | -----        | -----         | -----         | -----         | -----       |
+| Subnet Mask  |1              |1	            |1              |1             |1              |1              |1              |1            |
+| Given IP     |1	             |1             |0              |0	           |0              |0              |0              |1            |
+| Result       |1              |1             |0              |0             |0              |0              |0              |1            |
+
 Total Sum = 193
 
-Second Octet:
+
+### Second Octet:
+
 Binary and operation between (255 & 16) or (11111111 & 00010000)
 
-N/A	First Octet	Second Octet	Third Octet	Fourth Octet	Fifth Octet	Sixth Octet	Seventh Octet	Eight Octet
-Subnet Mask	1	1	1	1	1	1	1	1
-Given IP	0	0	0	1	0	0	0	0
-Result	0	0	0	1	0	0	0	0
+| N/A          | First Octet   | Second Octet |	Third Octet   |	Fourth Octet |	Fifth Octet  | 	Sixth Octet  | Seventh Octet | Eigth Octet |
+| -----        | -----         | -----        | -----         | -----        | -----         | -----         | -----         | -----       |
+| Subnet Mask  |1              |1	            |1              |1             |1              |1              |1              |1            |
+| Given IP     |0	             |0            |0               |1	           |0              |0              |0              |1            |
+| Result       |0              |0            |0               |1             |0              |0              |0              |1            |
+
 Total Sum = 16
 
-Third Octet:
+### Third Octet:
+
 Binary and operation between (255 & 20) or (11111111 & 00010100)
 
-N/A	First Octet	Second Octet	Third Octet	Fourth Octet	Fifth Octet	Sixth Octet	Seventh Octet	Eight Octet
-Subnet Mask	1	1	1	1	1	1	1	1
-Given IP	0	0	0	1	0	1	0	0
-Result	0	0	0	1	0	1	0	0
+| N/A          | First Octet   | Second Octet |	Third Octet   |	Fourth Octet |	Fifth Octet  | 	Sixth Octet  | Seventh Octet | Eigth Octet |
+| -----        | -----         | -----        | -----         | -----        | -----         | -----         | -----         | -----       |
+| Subnet Mask  |1              |1	            |1              |1             |1              |1              |1              |1            |
+| Given IP     |0	             |0             |0              |1	           |0              |1              |0              |1            |
+| Result       |0              |0             |0              |1             |0              |1              |0              |1            |
+
 Total Sum = 20
 
-Fourth Octet:
+### Fourth Octet:
+
 Binary and operation between (248 & 35) or (11111000 & 00100011)
 
-N/A	First Octet	Second Octet	Third Octet	Fourth Octet	Fifth Octet	Sixth Octet	Seventh Octet	Eight Octet
-Subnet Mask	1	1	1	1	1	0	0	0
-Given IP	0	0	1	0	0	0	1	1
-Result	0	0	1	0	0	0	0	0
-Total Sum = 32
+| N/A          | First Octet   | Second Octet |	Third Octet   |	Fourth Octet |	Fifth Octet  | 	Sixth Octet  | Seventh Octet | Eigth Octet |
+| -----        | -----         | -----        | -----         | -----        | -----         | -----         | -----         | -----       |
+| Subnet Mask  |1              |1	            |1              |1             |1              |0              |0              |0            |
+| Given IP     |0	             |0             |1              |0	           |0              |0              |1              |1            |
+| Result       |0              |0             |1              |0             |0              |0              |0              |0            |
 
-... network IP address = 193.16.20.32
 
-Next is to find the number of hosts:
+With that done, The network IP address is 193.16.20.32
+
+### Finding the number of hosts:
+
 Number of Hosts = 2^n - 2
 
 Where n = number of host bits minus two
 
         = number of host bits - 2
-This is because the first and last IP addresses are always reserved for the network and broadcast ID's respectively
 
-Note In this case we have to count the number of host's bits (0's) in the subnet mask binary starting from the right, which will give a total of 3
+This is due to the fact that the Network and Broadcast IDs are always reserved for the first and final IP addresses, respectively.
+
+### Note: 
+
+Starting from the right, we must count the amount of host bits (0's) in the subnet mask binary, which results in a total of 3.
 
 Number of hosts = 2^3 - 2
 
             = 8 - 2
             
             = 6
-From the details above we can then calculate the range of IP addresses and the broadcast:
 
-Note The first & last IP adress will be reserved for the network and broadcast so:
+We can then determine the range of IP addresses and the broadcast from the information above:
+
+### Note: 
+
+The network will reserve and broadcast the first and last IP addresses, so:
 
 Given IP: 193.16.20.35/29
 
