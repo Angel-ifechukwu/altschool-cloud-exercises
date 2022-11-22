@@ -349,5 +349,5 @@
         state: latest
 
     - name: SSL THingy
-      command: sudo certbot --apache -w /var/www/laravel-app -d angelifechukwu.me -d www.angelifechuwku.me --non-interactive --agree-tos -m angelifechukwu00@gmail.com
+      command: sudo certbot --apache -w /var/www/laravel-app -d angelifechukwu.me -d www.angelifechukwu.me --non-interactive --agree-tos -m angelifechukwu00@gmail.com
       ```
