@@ -1,0 +1,10 @@
+host: localhost
+mysql_user: root
+mysql_root_password: 1234
+db_user: angel
+user_pass: 1234
+db_name: angeldb
+http_port: "80"
+https_port: "443"
+ssh_port: "22"
+mysql_port: "3306
