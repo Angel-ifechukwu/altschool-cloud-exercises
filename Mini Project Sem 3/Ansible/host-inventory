@@ -1,0 +1,8 @@
+  [all]
+  44.211.189.84
+  18.234.104.40
+  34.230.36.147
+  [all:vars]
+  ansible_user=ubuntu
+  ansible_ssh_private_key_file=/home/vagrant/web.pem
+  ansible_ssh_common_args='-o StrictHostKeyChecking=no'
